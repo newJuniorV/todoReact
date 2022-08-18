@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./styles.css";
+import { InputTodo } from "./components/inputTodo";
+import { Incomplete } from "./components/incomplete";
+import { Complete } from "./components/complete";
 
 export const App = () => {
   //inputの中身のステート
@@ -52,45 +55,20 @@ export const App = () => {
   };
   return (
     <>
-      <div className="input-area">
-        <input
-          placeholder="Enter your to do"
-          value={todotext}
-          onChange={onChangeTodotext}
-        />
-        <button onClick={onClickAdd}>追加</button>
-      </div>
+      <InputTodo
+        todotext={todotext}
+        onChange={onChangeTodotext}
+        onClick={onClickAdd}
+      />
+      {/*「/」忘れがち */}
 
-      <div className="incomplete-area">
-        <p className="title">未完了のTodo</p>
-        <ul>
-          {incompleteTodes.map((todo, index) => {
-            return (
-              // {/*to do と、2つのボタンを横並びにするためにdivで囲みCSSで調整 */}
-              <div key={todo} className="list-row">
-                <li>{todo}</li>
-                <button onClick={() => onClickComplete(index)}>完了</button>
-                <button onClick={() => onClickDelete(index)}>削除</button>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
+      <Incomplete
+        incompleteTodes={incompleteTodes}
+        onClickComplete={onClickComplete}
+        onClickDelete={onClickDelete}
+      />
 
-      <div className="complete-area">
-        <p className="title">完了のTodo</p>
-        <ul>
-          {completeTodes.map((todo, index) => {
-            return (
-              //{/*to do と、1つのボタンを横並びにするためにdivで囲みCSSで調整 */}
-              <div key={todo} className="list-row">
-                <li>{todo}</li>
-                <button onClick={() => onClickBack(index)}>戻る</button>
-              </div>
-            );
-          })}
-        </ul>
-      </div>
+      <Complete completeTodes={completeTodes} onClickBack={onClickBack} />
     </>
   );
 };
