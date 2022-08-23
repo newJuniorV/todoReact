@@ -6,7 +6,7 @@ import { Complete } from "./components/complete";
 
 export const App = () => {
   //inputの中身のステート
-  const [todotext, setTodotext] = useState("");
+  const [todotext, setTodotext] = useState(""); //第一引数が変数名で、変化するときは第2引数を使う　文字として受け取る
 
   //未完了のTodoの中身のステート
   const [incompleteTodes, setIncompleteTodes] = useState([]);
@@ -19,8 +19,8 @@ export const App = () => {
 
   const onClickAdd = () => {
     if (todotext === "") return;
-    const newTodoes = [...incompleteTodes, todotext];
-    setIncompleteTodes(newTodoes);
+    const newTodoes = [...incompleteTodes, todotext]; //入力されたTODOを追加
+    setIncompleteTodes(newTodoes); //更新する
     //追加が押されたらインプットの仲を消す
     setTodotext("");
   };
@@ -48,7 +48,7 @@ export const App = () => {
     newCompleteTodes.splice(index, 1);
 
     setCompleteTodes(newCompleteTodes);
-    //未完了に追加する処理
+    //未完了に追加する（戻す）処理
     const newInInompleteTodoes = [...incompleteTodes, completeTodes[index]];
 
     setIncompleteTodes(newInInompleteTodoes);
